@@ -4,13 +4,23 @@ import yfinance as yf
 from prophet import Prophet
 from prophet.plot import plot_plotly
 from plotly  import graph_objs as go
+import pandas as pd
 
 
 START="2015-01-01"
 TODAY=dt.date.today().strftime("%Y-%m-%d")
 
+
+
+def load_popular_stocks():
+    df = pd.read_csv('stocks.csv', header=None)
+    return df[0].tolist()
+
+stocks = load_popular_stocks()
+
+
 st.title("Stock prediction app")
-stocks=("AAPL","GOOG","MSFT","GME")
+# stocks=("AAPL","GOOG","MSFT","GME")
 selected_stocks=st.selectbox("Select datasert for prediction ",stocks)
 
 n_years=st.slider("Years of prediction :",1,4)
